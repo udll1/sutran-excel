@@ -472,7 +472,9 @@ def generar_excel():
         out=io.BytesIO(); wb.save(out); out.seek(0)
         return send_file(out,mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',as_attachment=True,download_name=fname)
     except Exception as e:
-        return jsonify({'error':str(e)}),500
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error':str(e), 'trace':traceback.format_exc()}),500
 
 @app.route('/')
 def home(): return jsonify({'status':'ok','message':'Servidor Excel SUTRAN UDLL'})

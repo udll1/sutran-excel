@@ -7,6 +7,17 @@ import io, json
 
 app = Flask(__name__)
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return response
+
+@app.route('/excel', methods=['OPTIONS'])
+def options_excel():
+    return '', 204
+
 COLORES = {
     "A":"C6EFCE","T":"FFEB9C","F":"FFC7CE","DS":"D9D9D9",
     "CP":"FFE6CC","CPSS":"FFE6CC","FE":"E1D5E7","FR":"E1D5E7",

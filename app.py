@@ -69,7 +69,7 @@ def generar_mensual(trabajadores, dias_mes, mes_nom, anio, leyenda):
     azul = fill("2E75B6")
 
     # Fila 1 - Titulo completo
-    ws.merge_cells(1,1,1,TC)
+    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=TC)
     c = ws.cell(1,1,f"CONTROL DE ASISTENCIA - SUTRAN UDLL - {mes_nom} {anio}")
     c.font=Font(name='Arial',bold=True,size=10,color='FFFFFF'); c.fill=hdr; c.alignment=center()
     ws.row_dimensions[1].height=20
@@ -78,7 +78,7 @@ def generar_mensual(trabajadores, dias_mes, mes_nom, anio, leyenda):
     for col in range(1,5): ws.cell(2,col).fill=hdr
     for si,(s1,s2) in enumerate(semanas):
         c1=COL_DIA1+s1-1; c2=COL_DIA1+s2-1
-        if c1<c2: ws.merge_cells(2,c1,2,c2)
+        if c1<c2: ws.merge_cells(start_row=2, start_column=c1, end_row=2, end_column=c2)
         c=ws.cell(2,c1,f"SEMANA {si+1}")
         c.font=Font(name='Arial',bold=True,size=6,color='FFFFFF')
         c.fill=fill(SEM_COLORS[si]); c.alignment=center()
@@ -122,7 +122,7 @@ def generar_mensual(trabajadores, dias_mes, mes_nom, anio, leyenda):
 
     # Leyenda
     lr=len(trabajadores)+5
-    ws.merge_cells(lr,1,lr,2)
+    ws.merge_cells(start_row=lr, start_column=1, end_row=lr, end_column=2)
     c=ws.cell(lr,1,'LEYENDA'); c.font=Font(name='Arial',bold=True,size=7,color='FFFFFF')
     c.fill=hdr; c.alignment=center(); ws.row_dimensions[lr].height=13
     for li,ley in enumerate(leyenda):
@@ -152,13 +152,13 @@ def generar_firmas(trabajadores, dias_mes, mes_nom, anio, leyenda):
     hdr=fill("1F3864"); azul=fill("2E75B6")
 
     # Fila 1
-    ws.merge_cells(1,1,1,TC)
+    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=TC)
     c=ws.cell(1,1,f"CONTROL DE ASISTENCIA DEL PERSONAL SUTRAN REGION LA LIBERTAD - {mes_nom} {anio}")
     c.font=Font(name='Arial',bold=True,size=9,color='FFFFFF'); c.fill=hdr; c.alignment=center()
     ws.row_dimensions[1].height=20
 
     # Fila 2
-    ws.merge_cells(2,1,2,TC)
+    ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=TC)
     c=ws.cell(2,1,"GERENCIA DE ARTICULACION TERRITORIAL")
     c.font=Font(name='Arial',bold=True,size=8,color='FFFFFF'); c.fill=azul; c.alignment=center()
     ws.row_dimensions[2].height=14
@@ -167,7 +167,7 @@ def generar_firmas(trabajadores, dias_mes, mes_nom, anio, leyenda):
     for col in [COL_N,COL_NOMBRE]: ws.cell(3,col).fill=hdr
     for si,(s1,s2) in enumerate(semanas):
         c1=COL_DIA1+s1-1; c2=COL_DIA1+s2-1
-        if c1<c2: ws.merge_cells(3,c1,3,c2)
+        if c1<c2: ws.merge_cells(start_row=3, start_column=c1, end_row=3, end_column=c2)
         c=ws.cell(3,c1,f"SEM {si+1}")
         c.font=Font(name='Arial',bold=True,size=6,color='FFFFFF')
         c.fill=fill(SEM_COLORS[si]); c.alignment=center()
@@ -212,7 +212,7 @@ def generar_firmas(trabajadores, dias_mes, mes_nom, anio, leyenda):
 
     # Leyenda
     lr=len(trabajadores)+6
-    ws.merge_cells(lr,1,lr,2)
+    ws.merge_cells(start_row=lr, start_column=1, end_row=lr, end_column=2)
     c=ws.cell(lr,1,'LEYENDA'); c.font=Font(name='Arial',bold=True,size=7,color='FFFFFF')
     c.fill=hdr; c.alignment=center(); ws.row_dimensions[lr].height=13
     for li,ley in enumerate(leyenda):
@@ -248,7 +248,7 @@ def generar_tardanzas(trabajadores, dias_mes, mes_nom, anio, leyenda):
 
     hdr=fill("1F3864"); azul=fill("2E75B6")
 
-    ws.merge_cells(1,1,1,TC)
+    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=TC)
     c=ws.cell(1,1,f"REPORTE DE TARDANZAS - SUTRAN UDLL - {mes_nom} {anio}")
     c.font=Font(name='Arial',bold=True,size=10,color='FFFFFF'); c.fill=hdr; c.alignment=center()
     ws.row_dimensions[1].height=20
@@ -256,7 +256,7 @@ def generar_tardanzas(trabajadores, dias_mes, mes_nom, anio, leyenda):
     for col in range(1,5): ws.cell(2,col).fill=hdr
     for si,(s1,s2) in enumerate(semanas):
         c1=COL_DIA1+s1-1; c2=COL_DIA1+s2-1
-        if c1<c2: ws.merge_cells(2,c1,2,c2)
+        if c1<c2: ws.merge_cells(start_row=2, start_column=c1, end_row=2, end_column=c2)
         c=ws.cell(2,c1,f"SEMANA {si+1}")
         c.font=Font(name='Arial',bold=True,size=6,color='FFFFFF')
         c.fill=fill(sem_colors[si]); c.alignment=center()
@@ -328,7 +328,7 @@ def generar_tardanzas(trabajadores, dias_mes, mes_nom, anio, leyenda):
 
     # Leyenda
     lr=len(trabajadores)+5
-    ws.merge_cells(lr,1,lr,2)
+    ws.merge_cells(start_row=lr, start_column=1, end_row=lr, end_column=2)
     c=ws.cell(lr,1,'LEYENDA'); c.font=Font(name='Arial',bold=True,size=7,color='FFFFFF')
     c.fill=hdr; c.alignment=center(); ws.row_dimensions[lr].height=13
     for li,ley in enumerate(leyenda):
@@ -357,7 +357,7 @@ def generar_detalle(trabajadores, dias_mes, mes_nom, anio, leyenda):
     hdr=fill("1F3864"); azul=fill("2E75B6")
     gris=fill("F2F2F2")
 
-    ws.merge_cells(1,1,1,TC)
+    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=TC)
     c=ws.cell(1,1,f"DETALLE DE ASISTENCIA - SUTRAN UDLL - {mes_nom} {anio}")
     c.font=Font(name='Arial',bold=True,size=10,color='FFFFFF'); c.fill=hdr; c.alignment=center()
     ws.row_dimensions[1].height=20
@@ -365,7 +365,7 @@ def generar_detalle(trabajadores, dias_mes, mes_nom, anio, leyenda):
     for col in [COL_N,COL_NOMBRE]: ws.cell(2,col).fill=hdr
     for si,(s1,s2) in enumerate(semanas):
         c1=COL_DIA1+s1-1; c2=COL_DIA1+s2-1
-        if c1<c2: ws.merge_cells(2,c1,2,c2)
+        if c1<c2: ws.merge_cells(start_row=2, start_column=c1, end_row=2, end_column=c2)
         c=ws.cell(2,c1,f"SEMANA {si+1}")
         c.font=Font(name='Arial',bold=True,size=6,color='FFFFFF')
         c.fill=fill(sem_colors[si]); c.alignment=center()
@@ -430,7 +430,7 @@ def generar_detalle(trabajadores, dias_mes, mes_nom, anio, leyenda):
         fila_excel+=1
 
     # Leyenda
-    ws.merge_cells(fila_excel,1,fila_excel,2)
+    ws.merge_cells(start_row=fila_excel, start_column=1, end_row=fila_excel, end_column=2)
     c=ws.cell(fila_excel,1,'LEYENDA'); c.font=Font(name='Arial',bold=True,size=7,color='FFFFFF')
     c.fill=hdr; c.alignment=center(); ws.row_dimensions[fila_excel].height=13
     for li,ley in enumerate(leyenda):

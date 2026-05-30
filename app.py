@@ -408,10 +408,7 @@ def generar_detalle(trabajadores, dias_mes, mes_nom, anio, leyenda):
                 hi=dia_data.get('h_inicio',''); hf=dia_data.get('h_fin','')
                 ent=dia_data.get('entrada',''); sal=dia_data.get('salida','')
                 turno=f"{hi}-{hf}" if hi and hf else hi or hf
-                detalle=f"{lugar}
-{turno}
-{ent}>{sal}" if lugar else f"{turno}
-{ent}>{sal}"
+                detalle=(f"{lugar}\n{turno}\n{ent}>{sal}") if lugar else (f"{turno}\n{ent}>{sal}")
                 c=ws.cell(fila_excel,col,detalle)
                 c.font=Font(name='Arial',size=5); c.alignment=Alignment(horizontal='center',vertical='center',wrap_text=True)
                 c.fill=gris; c.border=border()

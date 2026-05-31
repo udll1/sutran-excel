@@ -302,10 +302,10 @@ def generar_tardanzas(trabajadores, dias_mes, mes_nom, anio, leyenda):
         si=(dd-1)//7; col=COL_DIA1+dd-1
         c=ws.cell(3,col,dd); c.font=Font(name='Arial',bold=True,size=6,color='FFFFFF')
         c.fill=fill(sem_colors[si]); c.alignment=center(); c.border=border()
-        ws.column_dimensions[get_column_letter(col)].width=4.5
+        ws.column_dimensions[get_column_letter(col)].width=6.5
     c=ws.cell(3,COL_TOTAL,'TOTAL\nMIN'); c.font=Font(name='Arial',bold=True,size=7,color='FFFFFF')
     c.fill=fill('E36C09'); c.alignment=center(); c.border=border()
-    ws.column_dimensions[get_column_letter(COL_TOTAL)].width=8
+    ws.column_dimensions[get_column_letter(COL_TOTAL)].width=10
     ws.row_dimensions[3].height=24
 
     if not trab_con_tard:
@@ -321,12 +321,13 @@ def generar_tardanzas(trabajadores, dias_mes, mes_nom, anio, leyenda):
             for dd in range(1,dias_mes+1):
                 col=COL_DIA1+dd-1
                 if dd in t['tard_dias']:
-                    c=ws.cell(r,col,f"+{t['tard_dias'][dd]}")
+                    c=ws.cell(r,col,f"{t['tard_dias'][dd]} min")
                     c.font=Font(name='Arial',size=7,bold=True,color='9C5700')
                     c.fill=fill('FFEB9C'); c.alignment=center(); c.border=border()
                 else:
                     ws.cell(r,col).border=border()
-            c=ws.cell(r,COL_TOTAL,t['total_min'])
+            total_str = f"{t['total_min']} min" if t['total_min'] < 60 else f"{t['total_min']//60}h {t['total_min']%60} min"
+            c=ws.cell(r,COL_TOTAL,total_str)
             c.font=Font(name='Arial',size=9,bold=True,color='9C5700')
             c.fill=fill('FFB830'); c.alignment=center(); c.border=border()
 
@@ -376,7 +377,7 @@ def generar_detalle(trabajadores, dias_mes, mes_nom, anio, leyenda):
     ws.row_dimensions[3].height=18
 
     # Estados que NO requieren detalle (no asistio)
-    sin_detalle = ['F','DS','FE','FR','DM','LM','LP','LO','LUB','LS','V','CP','CPSS','CO','REVISION']
+    sin_detalle = ['F','DS','C','FE','FR','DM','LM','LP','LO','LUB','LS','V','CP','CPSS','CO','REVISION']
 
     fila = 4
     for t in trabajadores:

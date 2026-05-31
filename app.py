@@ -321,7 +321,9 @@ def generar_tardanzas(trabajadores, dias_mes, mes_nom, anio, leyenda):
             for dd in range(1,dias_mes+1):
                 col=COL_DIA1+dd-1
                 if dd in t['tard_dias']:
-                    c=ws.cell(r,col,f"{t['tard_dias'][dd]} min")
+                    min_dia = t['tard_dias'][dd]
+                    txt_dia = f"{min_dia} min" if min_dia < 60 else f"{min_dia//60}h {min_dia%60} min"
+                    c=ws.cell(r,col,txt_dia)
                     c.font=Font(name='Arial',size=7,bold=True,color='9C5700')
                     c.fill=fill('FFEB9C'); c.alignment=center(); c.border=border()
                 else:
